@@ -2,6 +2,7 @@
   "name": "modern-invoice-mui",
   "version": "1.0.0",
   "description": "現代化發票上傳與辨識系統 - 使用 Material-UI",
+  "homepage": "https://chenjianying0211.github.io/modern-accounting",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -32,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
