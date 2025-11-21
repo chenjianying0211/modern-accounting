@@ -13,7 +13,6 @@ import {
   Alert,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
 } from '@mui/material';
 import {

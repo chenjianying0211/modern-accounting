@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Card,
@@ -19,7 +19,6 @@ import {
   TableRow,
   Paper,
   Chip,
-  IconButton,
   Tooltip,
   Alert,
   LinearProgress,
@@ -28,8 +27,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
-  Search as SearchIcon,
-  FileDownload as DownloadIcon,
   PictureAsPdf as PdfIcon,
   TableChart as ExcelIcon,
   Description as CsvIcon,
@@ -72,7 +69,7 @@ interface ReportData {
 }
 
 const ReportsPage: React.FC = () => {
-  const { user } = useAuth();
+  const { } = useAuth();
 
   // 狀態管理
   const [reportData, setReportData] = useState<ReportData | null>(null);
@@ -87,7 +84,7 @@ const ReportsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // 載入報告數據
-  const loadReportData = async () => {
+  const loadReportData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -114,7 +111,7 @@ const ReportsPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateFrom, dateTo, category, department]);
 
   // 模擬數據
   const getMockReportData = (): ReportData => {
@@ -189,7 +186,7 @@ const ReportsPage: React.FC = () => {
   // 初始載入
   useEffect(() => {
     loadReportData();
-  }, []);
+  }, [loadReportData]);
 
   // 匯出報告
   const handleExportReport = async (format: 'excel' | 'csv' | 'pdf') => {

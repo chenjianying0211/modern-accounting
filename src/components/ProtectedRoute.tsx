@@ -14,7 +14,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   requiredRoles,
   redirectTo = '/login',
 }) => {
-  const { user, isAuthenticated, hasRole } = useAuth();
+  const { isAuthenticated, hasRole } = useAuth();
   const location = useLocation();
 
   // 未登入，重導向到登入頁面

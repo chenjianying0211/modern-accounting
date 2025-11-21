@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Card,
@@ -51,11 +51,9 @@ interface AccountingCategory {
 }
 
 const CategoriesPage: React.FC = () => {
-  const { user } = useAuth();
-
   // 狀態管理
   const [categories, setCategories] = useState<AccountingCategory[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<AccountingCategory | null>(null);
@@ -73,7 +71,7 @@ const CategoriesPage: React.FC = () => {
   });
 
   // 載入類別列表
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       setLoading(true);
       const response = await settingsApi.getCategories();
@@ -91,7 +89,7 @@ const CategoriesPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // 模擬資料
   const getMockCategories = (): AccountingCategory[] => {
@@ -162,7 +160,7 @@ const CategoriesPage: React.FC = () => {
   // 初始載入
   useEffect(() => {
     loadCategories();
-  }, []);
+  }, [loadCategories]);
 
   // 重置表單
   const resetForm = () => {

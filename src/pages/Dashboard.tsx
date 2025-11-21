@@ -133,7 +133,7 @@ const DashboardPage: React.FC = () => {
   const { user } = useAuth();
   const [dashboardData, setDashboardData] = useState<DashboardSummary | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
 
   // 載入儀表板數據
   useEffect(() => {

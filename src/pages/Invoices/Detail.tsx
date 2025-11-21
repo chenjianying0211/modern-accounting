@@ -35,7 +35,7 @@ import { Invoice } from '../../types/invoice';
 const InvoiceDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { user, hasRole } = useAuth();
+  const { hasRole } = useAuth();
 
   const [invoice, setInvoice] = useState<Invoice | null>(null);
   const [loading, setLoading] = useState(true);

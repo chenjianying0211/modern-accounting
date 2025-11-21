@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -60,7 +60,7 @@ const StatusChip: React.FC<{ status: string }> = ({ status }) => {
 
 const InvoiceListPage: React.FC = () => {
   const navigate = useNavigate();
-  const { user, hasRole } = useAuth();
+  const { hasRole } = useAuth();
 
   // 狀態管理
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -75,7 +75,7 @@ const InvoiceListPage: React.FC = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   // 載入發票列表
-  const loadInvoices = async () => {
+  const loadInvoices = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -104,7 +104,7 @@ const InvoiceListPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, rowsPerPage, statusFilter]);
 
   // 模擬資料
   const getMockInvoices = (): Invoice[] => {
@@ -197,7 +197,7 @@ const InvoiceListPage: React.FC = () => {
 
   useEffect(() => {
     loadInvoices();
-  }, [page, rowsPerPage, statusFilter]);
+  }, [page, rowsPerPage, statusFilter, loadInvoices]);
 
   // 篩選發票
   const filteredInvoices = invoices.filter(invoice =>
