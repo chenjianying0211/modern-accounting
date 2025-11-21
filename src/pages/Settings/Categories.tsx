@@ -34,7 +34,6 @@ import {
   Category as CategoryIcon,
   Save as SaveIcon,
 } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
 import { settingsApi } from '../../utils/api';
 
 // 會計類別類型

@@ -35,7 +35,6 @@ import {
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import dayjs, { Dayjs } from 'dayjs';
-import { useAuth } from '../contexts/AuthContext';
 import { reportApi } from '../utils/api';
 import { LineChart, PieChart } from '@mui/x-charts';
 
@@ -69,8 +68,6 @@ interface ReportData {
 }
 
 const ReportsPage: React.FC = () => {
-  const { } = useAuth();
-
   // 狀態管理
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [loading, setLoading] = useState(false);
